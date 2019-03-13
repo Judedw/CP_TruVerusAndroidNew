@@ -1,17 +1,27 @@
 package android.mobile.com.truverusandroid;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.mobile.com.truverusandroid.adapters.ViewPagerAdapter;
 import android.mobile.com.truverusandroid.fragments.LogoutFragment;
 import android.mobile.com.truverusandroid.fragments.MyCollectionFragment;
 import android.mobile.com.truverusandroid.fragments.ProductDetailsFragment;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -23,12 +33,15 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Adapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,7 +51,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener  {
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -54,21 +72,19 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        appbar = (AppBarLayout) findViewById(R.id.main_app_bar);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        toolbar = findViewById(R.id.toolbar);
+        appbar = findViewById(R.id.main_app_bar);
+        tabLayout = findViewById(R.id.tabs);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
 
-
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(this);
         setupViewPager(viewPager);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -82,6 +98,42 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     }
 
+
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(ProductDetailsFragment.newInstance(), "Product Details");
+        viewPagerAdapter.addFragment(MyCollectionFragment.newInstance(), "My Collection");
+
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+
+
+
+
+    @Override
+    public void onBackPressed() {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (getFragmentManager().getBackStackEntryCount() > 0) {
+
+            getFragmentManager().popBackStack();
+        } else {
+
+            super.onBackPressed();
+        }
+    }
+
+
+
+
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -92,29 +144,31 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     }
 
+//    @Override
+//    public void onPageSelected(int position) {
+//
+//        Fragment fragment = (Fragment) adapter.instantiateItem(viewPager, position);
+//        if (fragment instanceof EntertainmentFragment) {
+//
+//            ((EntertainmentFragment)fragment).onFragmentVisible();
+//        }else if (fragment instanceof ViuAppsFragment){
+//
+//            ((ViuAppsFragment)fragment).onFragmentVisible();
+//        }else {
+//
+//            ((OffersFragment)fragment).onFragmentVisible();
+//        }
+//    }
+
     @Override
     public void onPageScrollStateChanged(int state) {
 
     }
-    private void setupViewPager(ViewPager viewPager) {
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(ProductDetailsFragment.newInstance(), "Product Details");
-        viewPagerAdapter.addFragment(MyCollectionFragment.newInstance(), "My Collection");
 
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-    private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(MainActivity.this,"Successfully signed out",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                });
-    }
+
+
+
+
     public void initNavigationDrawer() {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -137,8 +191,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
@@ -147,18 +199,61 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 switch (id) {
                     case R.id.nav_home:
 
+                        // [START custom_event]
+//                        mTracker.send(new HitBuilders.EventBuilder()
+//                                .setCategory("Action")
+//                                .setAction("Home")
+//                                .setLabel("Navigate to Home Screen")
+//                                .build());
+
+                        Bundle params = new Bundle();
+                        params.putString("screen", "Main Manu");
+                        params.putString("navigate_to", "Home");
 
 
+                        // [END custom_event]
+
+                        viewPager.setCurrentItem(0, true);
+                        drawerLayout.closeDrawers();
+                        setNavigationItem(0);
                         break;
 
+                    case R.id.nav_acc_setting:
+
+                        // [START custom_event]
+//                        mTracker.send(new HitBuilders.EventBuilder()
+//                                .setCategory("Action")
+//                                .setAction("Account Settings")
+//                                .setLabel("Navigate to Account Settings Screen")
+//                                .build());
+
+                        Bundle params3 = new Bundle();
+                        params3.putString("screen", "Main Manu");
+                        params3.putString("navigate_to", "Account Settings");
+
+                        // [END custom_event]
+
+
+                        drawerLayout.closeDrawers();
+                        break;
 
                     case R.id.nav_logout:
 
-                        Log.d("outout", "onNavigationItemSelected: ");
-                        signOut();
-                        openLogoutFragment();
+                        // [START custom_event]
+//                        mTracker.send(new HitBuilders.EventBuilder()
+//                                .setCategory("Action")
+//                                .setAction("Logout")
+//                                .setLabel("Navigate to Logout Screen")
+//                                .build());
 
+                        Bundle params5 = new Bundle();
+                        params5.putString("screen", "Main Manu");
+                        params5.putString("navigate_to", "Logout");
+                        openTopUpFragment();
                         drawerLayout.closeDrawers();
+                        // [END custom_event]
+
+
                         break;
 
 
@@ -168,6 +263,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         });
     }
+
+
 
     public void setNavigationItem(int position) {
 
@@ -179,7 +276,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
-    public void openLogoutFragment() {
+
+
+    public void openTopUpFragment() {
 
         Fragment topupFragment = new LogoutFragment().newInstance(drawerLayout);
 
@@ -188,8 +287,45 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.drawer, topupFragment, LogoutFragment.TAG);
         fragmentTransaction.addToBackStack(LogoutFragment.TAG);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+
+
+
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
 
 
 
     }
-}
+

@@ -1,17 +1,23 @@
 package android.mobile.com.truverusandroid;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -22,6 +28,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.facebook.FacebookSdk;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -33,14 +42,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LoginButton login_button;
     private static final String EMAIL = "email";
     private Button createAccountBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signInButton = findViewById(R.id.sign_in_button);
-        createAccountBtn = (Button)findViewById(R.id.createAccountBtn);
         callbackManager = CallbackManager.Factory.create();
+        signInButton = findViewById(R.id.sign_in_button);
+        createAccountBtn = (Button) findViewById(R.id.createAccountBtn);
+        TextView textView = (TextView) signInButton.getChildAt(0);
+        textView.setText("");
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -69,7 +81,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                AccessToken accessToken = loginResult.getAccessToken();
+               GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                   @Override
+                   public void onCompleted(JSONObject object, GraphResponse response) {
+                       DisplayData(object);
+                   }
+               });
+
+                Bundle bundle = new Bundle();
+                bundle.putString("fields", "email , id");
+                graphRequest.setParameters(bundle);
+                graphRequest.executeAsync();
+
+                Log.d("login result", String.valueOf(loginResult.getAccessToken()));
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
             }
 
             @Override
@@ -91,6 +118,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
                     }
 
                     @Override
@@ -128,11 +157,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            // Signed in successfully, show authenticated UI.
+
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+
             Log.w("Google Sign In Error", "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_LONG).show();
         }
@@ -143,7 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null) {
+        if (account != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
         }
@@ -161,5 +189,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         }
+    }
+
+    private void DisplayData(JSONObject object) {
+        Log.d("facebook log in details", "data" + object);
     }
 }

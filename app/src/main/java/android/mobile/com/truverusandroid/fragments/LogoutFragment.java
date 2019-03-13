@@ -14,8 +14,8 @@ import android.mobile.com.truverusandroid.R;
  * A simple {@link Fragment} subclass.
  */
 public class LogoutFragment extends Fragment {
-
     public static final String TAG = LogoutFragment.class.getSimpleName();
+
     public static LogoutFragment newInstance(DrawerLayout drawer) {
 
         LogoutFragment fragment = new LogoutFragment();

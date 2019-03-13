@@ -73,13 +73,13 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
+        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
         app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/loginPageTextColor"
-        app:itemTextColor="@color/colorPrimary"
+        app:itemTextColor="@color/white"
         app:menu="@menu/menu_navigation" />
 
 </android.support.v4.widget.DrawerLayout>
