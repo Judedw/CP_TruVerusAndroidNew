@@ -1,12 +1,20 @@
 <resources>
-    <string name="app_name">truverusAndroid</string>
-    <string name="facebook_app_id">2355567004663762</string>
-    <string name="fb_login_protocol_scheme">fb113542239346805</string>
-    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="app_name">CPTruverusAndroid</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+
+    <string name="facebook_app_id">312399669460091</string>
+    <string name="fb_login_protocol_scheme">fb113542239346805</string>
+    <string name="server_client_id">734217715162-mfk9klqp6dcin7j6nitat6m73usrhm93.apps.googleusercontent.com</string>
+    <string name="description">When you think Nike, your mind can take you in so many different directions, but it all comes back to the swoosh logo. Nike is the creator of some the world\'s most influential shoe lines: Air Max, Air Force, and Air Huarache just to name a few. Nike evolves as styles shift, but their mission remains the same world.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--ga0RGNYHvNM5d0SLGQfpQWAPGJ8=-->
 </resources>

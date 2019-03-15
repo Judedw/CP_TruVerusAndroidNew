@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ProductDetailsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/profileDetailsContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:paddingBottom="20dp"
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/imagecontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:ci_drawable="@drawable/circlerindicater_colours"
+                app:ci_drawable_unselected="@drawable/circlerindicater_colours_unselected" />
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/indicator"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="ADIDAS JACKET"
+                android:textColor="@color/colodarkrGray"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/itemName"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/description"
+                android:textAlignment="center"
+                android:textColor="@color/colorGray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/watchVedio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imagecontainer"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/watchvedio"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Watch Here" />
+
+            <Button
+                android:id="@+id/watchvedioBtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/playbutton" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/transferBtn"
+            android:layout_width="350dp"
+            android:layout_height="48dp"
+            android:layout_below="@+id/watchVedio"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/black_input"
+            android:padding="5dp"
+            android:text="Transfer"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</ScrollView>
