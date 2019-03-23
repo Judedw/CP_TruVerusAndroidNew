@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorBlack">
 
-        <ImageView
+        <Button
             android:id="@+id/btnBack"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/arrow_back_white" />
+            android:background="@drawable/arrow_back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,7 +60,8 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_person_black" />
 
             <EditText
                 android:id="@+id/txtLastName"
@@ -74,7 +75,8 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/ic_person_black" />
 
             <EditText
                 android:id="@+id/txtEmail"
@@ -123,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/black_input"
+                android:background="@drawable/black_input_button"
                 android:padding="5dp"
                 android:text="Sign Up"
                 android:textAllCaps="false"
@@ -174,21 +176,21 @@
 
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/btnGoogleSignIn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/btnFacebookSignIn"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/facebook"
-                    android:text=""
-                    android:visibility="visible"
-                    facebook:com_facebook_login_text=""
-                    facebook:com_facebook_logout_text="" />
+                <!--<com.facebook.login.widget.LoginButton-->
+                <!--android:id="@+id/btnFacebookSignIn"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:background="@drawable/facebook_logo"-->
+                <!--android:text=""-->
+                <!--android:visibility="visible"-->
+                <!--facebook:com_facebook_login_text=""-->
+                <!--facebook:com_facebook_logout_text="" />-->
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

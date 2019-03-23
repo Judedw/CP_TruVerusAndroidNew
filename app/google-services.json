@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "231942660556",
+    "firebase_url": "https://cptruverusbase-1553057346264.firebaseio.com",
+    "project_id": "cptruverusbase-1553057346264",
+    "storage_bucket": "cptruverusbase-1553057346264.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231942660556:android:6c3e1fedeab5ff57",
+        "android_client_info": {
+          "package_name": "com.clearpicture.Truverus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231942660556-59db2lsde2nq6oa2m3jkrd1p7cli90jl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clearpicture.Truverus",
+            "certificate_hash": "b553933a7298d565167de8c553180c74cab0face"
+          }
+        },
+        {
+          "client_id": "231942660556-6s6o8mdfenips2sonjiek6qbtuvtieig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDpSbN-s6YE51a0MYVpN2RHn4OyxpK2WY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231942660556-6s6o8mdfenips2sonjiek6qbtuvtieig.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "231942660556-co68nr2169n4m64cdplse8qn733dloj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.clearpicture.Truverus"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
