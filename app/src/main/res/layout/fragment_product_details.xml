@@ -1,200 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--xmlns:tools="http://schemas.android.com/tools">-->
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:id="@+id/app_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="240dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
-
-        <!--<android.support.design.widget.CollapsingToolbarLayout-->
-            <!--android:id="@+id/collapsing_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:contentScrim="@color/colorPrimary"-->
-            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-            <!--<android.support.v4.view.ViewPager-->
-                <!--android:id="@+id/pager"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="400dp" />-->
-
-            <!--<me.relex.circleindicator.CircleIndicator-->
-                <!--android:id="@+id/indicator"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="48dp"-->
-                <!--app:ci_drawable="@drawable/circlerindicater_colours"-->
-                <!--app:ci_drawable_unselected="@drawable/circlerindicater_colours_unselected" />-->
-
-
-
-
-        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
-
-
-
-    <!--<android.support.v4.widget.NestedScrollView-->
-        <!--android:id="@+id/rv_container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-        <!--tools:context=".MainActivity">-->
-
-
-        <!--<LinearLayout-->
-            <!--android:id="@+id/slideView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
-
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/itemName"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@+id/indicator"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="ADIDAS JACKET"-->
-                        <!--android:textColor="@color/colodarkrGray"-->
-                        <!--android:textStyle="bold" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/itemDescription"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@+id/itemName"-->
-                        <!--android:layout_alignParentBottom="true"-->
-                        <!--android:layout_marginLeft="20dp"-->
-                        <!--android:layout_marginTop="15dp"-->
-                        <!--android:layout_marginRight="20dp"-->
-                        <!--android:text="@string/description"-->
-                        <!--android:textAlignment="center"-->
-                        <!--android:textColor="@color/colorGray" />-->
-                <!--</LinearLayout>-->
-
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/watchVedio"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginTop="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--android:layout_marginBottom="20dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="horizontal">-->
-
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Watch Here"-->
-                        <!--android:textColor="@color/watchvedio"-->
-                        <!--android:textSize="15sp"-->
-                        <!--android:textStyle="bold" />-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/watchvedioBtn"-->
-                        <!--android:layout_width="20dp"-->
-                        <!--android:layout_height="20dp"-->
-                        <!--android:layout_marginLeft="20dp"-->
-                        <!--android:background="@drawable/playbutton" />-->
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content">-->
-
-                    <!--<Button-->
-                        <!--android:id="@+id/transferBtn"-->
-                        <!--android:layout_width="350dp"-->
-                        <!--android:layout_height="48dp"-->
-                        <!--android:layout_marginLeft="20dp"-->
-                        <!--android:layout_marginTop="20dp"-->
-                        <!--android:layout_marginRight="20dp"-->
-                        <!--android:background="@drawable/black_input"-->
-                        <!--android:padding="5dp"-->
-                        <!--android:text="Transfer"-->
-                        <!--android:textAllCaps="false"-->
-                        <!--android:textColor="@color/colorWhite"-->
-                        <!--android:textSize="14sp" />-->
-                <!--</LinearLayout>-->
-
-            <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
-
-    <!--</android.support.v4.widget.NestedScrollView>-->
-
-<!--</android.support.design.widget.CoordinatorLayout>-->
-
-
-
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
-                android:id="@+id/backdrop"
+            <!--<ImageView-->
+            <!--android:id="@+id/backdrop"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--android:background="@drawable/adidas"-->
+            <!--app:layout_collapseMode="parallax" />-->
+
+            <com.clearpicture.Truverus.util.CustomViewPager
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                android:background="@drawable/adidas"
+                android:layout_height="300dp"
                 app:layout_collapseMode="parallax" />
 
-            <!--<com.clearpicture.Truverus.CustomViewPager-->
-            <!--android:id="@+id/pager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="400dp" />-->
-
-            <!--<me.relex.circleindicator.CircleIndicator-->
-            <!--android:id="@+id/indicator"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="48dp"-->
-            <!--app:ci_drawable="@drawable/circlerindicater_colours"-->
-            <!--app:ci_drawable_unselected="@drawable/circlerindicater_colours_unselected" />-->
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            app:ci_drawable="@drawable/circlerindicater_colours"
+            app:ci_drawable_unselected="@drawable/circlerindicater_colours_unselected" />
+
 
     </android.support.design.widget.AppBarLayout>
 
@@ -216,86 +74,86 @@
                 android:layout_marginBottom="16dp">
 
                 <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <TextView
-                android:id="@+id/itemName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="ADIDAS JACKET"
-                android:textColor="@color/colodarkrGray"
-                android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/itemName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="ADIDAS JACKET"
+                            android:textColor="@color/colodarkrGray"
+                            android:textStyle="bold" />
 
-                <TextView
-                android:id="@+id/itemDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemName"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:text="@string/description"
-                android:textAlignment="center"
-                android:textColor="@color/colorGray" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                android:id="@+id/watchVedio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/itemDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/itemName"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="20dp"
+                            android:text="@string/description"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorGray" />
+                    </LinearLayout>
 
 
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Watch Here"
-                android:textColor="@color/watchvedio"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                    <LinearLayout
+                        android:id="@+id/watchVedio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                <Button
-                android:id="@+id/watchvedioBtn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/playbutton" />
-                </LinearLayout>
 
-                <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Watch Here"
+                            android:textColor="@color/watchvedio"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
-                <Button
-                android:id="@+id/transferBtn"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/black_input"
-                android:padding="5dp"
-                android:text="Transfer"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
-                </LinearLayout>
+                        <Button
+                            android:id="@+id/watchvedioBtn"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/playbutton" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/transferBtn"
+                            android:layout_width="350dp"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/black_input"
+                            android:padding="5dp"
+                            android:text="Transfer"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

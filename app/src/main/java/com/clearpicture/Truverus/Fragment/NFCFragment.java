@@ -31,7 +31,6 @@ public class NFCFragment extends Fragment  {
                              Bundle savedInstanceState) {
 
       View view = inflater.inflate(R.layout.fragment_nfc, container, false);
-        mAppBarLayout = (AppBarLayout)view.findViewById(R.id.app_bar);
         return  view;
     }
 

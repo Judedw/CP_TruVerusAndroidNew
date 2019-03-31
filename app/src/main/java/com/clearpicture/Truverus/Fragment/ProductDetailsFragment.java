@@ -18,10 +18,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.clearpicture.Truverus.Adapter.ImageSliderAdapter;
-import com.clearpicture.Truverus.CustomViewPager;
+import com.clearpicture.Truverus.util.CustomViewPager;
 import com.clearpicture.Truverus.R;
-import com.clearpicture.Truverus.SignInActivity;
-import com.clearpicture.Truverus.SignUpActivity;
 
 import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator;
@@ -53,17 +51,15 @@ public class ProductDetailsFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product_details, container, false);
 
-//        mPager = (CustomViewPager) view.findViewById(R.id.pager);
-//        indicator = (CircleIndicator) view.findViewById(R.id.indicator);
-        mAppBarLayout = (AppBarLayout)view.findViewById(R.id.app_bar);
+        mPager = (CustomViewPager) view.findViewById(R.id.pager);
+        indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+//        mAppBarLayout = (AppBarLayout)view.findViewById(R.id.app_bar);
         animateScrollView = (NestedScrollView)view.findViewById(R.id.animateScrollView);
         watchVedio = (LinearLayout)view.findViewById(R.id.watchVedio);
         watchVedio.setOnClickListener(this);
-//        init();
+        init();
         return view;
-
-
-
+        
     }
 
 

@@ -1,6 +1,8 @@
 package com.clearpicture.Truverus.Fragment;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,26 +10,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.clearpicture.Truverus.Adapter.CollectionAdapter;
+import com.clearpicture.Truverus.HomeActivity;
+import com.clearpicture.Truverus.MainActivity;
 import com.clearpicture.Truverus.R;
+import com.clearpicture.Truverus.SignInActivity;
 import com.clearpicture.Truverus.models.CollectionListModel;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.clearpicture.Truverus.SignInActivity.MY_PREFS_NAME;
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CollectionFragment extends Fragment {
-
+public class CollectionFragment extends Fragment implements View.OnClickListener {
 
     private CollectionAdapter mAdapter;
     private RecyclerView recycler_collection;
     private ArrayList<CollectionListModel> collectionList;
     RecyclerView.LayoutManager layoutManager;
-    public CollectionFragment() {
+    private LinearLayout noCollectionContainer;
+    private Button signinBtn;
+    String signInStatus = "";
+    public CollectionFragment( ) {
         // Required empty public constructor
     }
+    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
     public CollectionFragment newInstance() {
         CollectionFragment fragment = new CollectionFragment();
@@ -40,7 +54,28 @@ public class CollectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
         initializeList();
         recycler_collection = (RecyclerView) view.findViewById(R.id.recycler_collection);
+        noCollectionContainer = (LinearLayout) view.findViewById(R.id.noCollectionContainer);
+        signinBtn = (Button)view.findViewById(R.id.signinBtn);
 
+        signinBtn.setOnClickListener(this);
+
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String restoredText = prefs.getString("loginSatus", "false");
+        if (restoredText != null) {
+            signInStatus = prefs.getString("loginSatus", "false");//"No name defined" is the default value.
+            System.out.print("the status is == "+signInStatus);
+
+        }
+
+
+        if (signInStatus .equals("false")){
+            noCollectionContainer.setVisibility(View.VISIBLE);
+            recycler_collection.setVisibility(View.INVISIBLE);
+        }
+        if (signInStatus .equals("true")){
+            noCollectionContainer.setVisibility(View.INVISIBLE);
+            recycler_collection.setVisibility(View.VISIBLE);
+        }
 
         layoutManager = new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
 
@@ -54,6 +89,8 @@ public class CollectionFragment extends Fragment {
 
         return  view;
     }
+
+
 
     public void initializeList(){
 
@@ -96,4 +133,13 @@ public class CollectionFragment extends Fragment {
         collectionList.add(collectionListModel6);
     }
 
+    @Override
+    public void onClick(View v) {
+switch (v.getId()){
+    case R.id.signinBtn:
+        Intent i = new Intent(getActivity(), SignInActivity.class);
+        startActivity(i);
+        break;
+}
+    }
 }

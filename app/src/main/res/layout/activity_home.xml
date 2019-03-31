@@ -14,11 +14,15 @@
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
+        android:background="@color/colorBlack"
         android:id="@+id/nav_view"
+        app:itemTextColor="@color/colorWhite"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:civ_border_width="2dp"
+        app:itemIconTint="@color/colorWhite"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />
 

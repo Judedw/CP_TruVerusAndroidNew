@@ -10,4 +10,6 @@
     <color name="colodarkrGray">#838588</color>
     <color name="watchvedio">#1b75ab</color>
     <color name="tabNotSelected">#bdbdbd</color>
+    <color name="personalDetailsTextColor">#58595b</color>
+
 </resources>

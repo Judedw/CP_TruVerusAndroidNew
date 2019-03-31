@@ -1,6 +1,8 @@
 package com.clearpicture.Truverus;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.clearpicture.Truverus.Fragment.CollectionFragment;
 import com.clearpicture.Truverus.main.AppControl;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -16,10 +19,14 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -27,6 +34,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.facebook.Profile;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -44,6 +56,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private static final int REQUEST_SiGN_IN = 1;
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
+    private   Uri profilePicURL;
+    private String googleemail;
+    private String  name;
+    private String email;
+
+
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +77,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnFacebookSignIn = (LoginButton) findViewById(R.id.btnFacebookSignIn);
         btnGoogleSignIn = findViewById(R.id.sign_in_button);
         btnCreateAcc = findViewById(R.id.btnCreateAcc);
-        btnFacebookSignIn.setReadPermissions(Arrays.asList(EMAIL));
+        btnFacebookSignIn.setReadPermissions(Arrays.asList( EMAIL));
         btnFacebookSignIn.setReadPermissions("public_profile", "email", "user_friends");
         btnFacebookSignIn.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         btnFacebookSignIn.setCompoundDrawablePadding(5);
         btnFacebookSignIn.setText("");
+
+
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(AppControl.clientID).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
@@ -81,28 +102,43 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
                     AccessToken currentAccessToken) {
+                if (currentAccessToken != null){
 
+                    loadUserProfile(currentAccessToken);
 
+                }
             }
         };
         System.out.print(accessTokenTracker);
         // If the access token is available already assign it.
          accessToken = AccessToken.getCurrentAccessToken();
         System.out.print(accessToken);
+        btnFacebookSignIn.setReadPermissions(Arrays.asList("email","public_profile"));
         btnFacebookSignIn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(getApplication(), "log in succes!",
-                        Toast.LENGTH_LONG).show();
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
 
-                System.out.print("ljkghgcf"+loginResult.getAccessToken().getUserId());
-                System.out.print(loginResult.getAccessToken().getToken());
 
-                Log.d("login result", String.valueOf(loginResult.getAccessToken()));
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                                email=object.optString("email");
+                            }
+
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "email");
+                request.setParameters(parameters);
+                request.executeAsync();
                 Intent i = new Intent(SignInActivity.this, HomeActivity.class);
                 startActivity(i);
 
             }
+
+
 
             @Override
             public void onCancel() {
@@ -125,14 +161,34 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Toast.makeText(getApplication(), "success!!",
-                                Toast.LENGTH_LONG).show();
+
+
+                        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                                JSONObject json = response.getJSONObject();
+                                try {
+                                    if (json != null) {
+
+                                        JSONObject data = json.getJSONObject("picture").getJSONObject("data");
+                                        String name=json.getString("name");
+                                        email = json.getString("email");
+                                        String picUrl=data.getString("url");
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        });
+
                         System.out.print("ljkghgcf"+loginResult.getAccessToken().getUserId());
                         System.out.print(loginResult.getAccessToken().getToken());
+                        Profile profile = Profile.getCurrentProfile();
 
-                        Log.d("login result", String.valueOf(loginResult.getAccessToken()));
-                        Intent i = new Intent(SignInActivity.this, HomeActivity.class);
-                        startActivity(i);
+//                        nextActivity(profile);
+
                     }
 
                     @Override
@@ -149,6 +205,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
     @Override
     protected void onStart() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -158,6 +215,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         super.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Facebook login
+        Profile profile = Profile.getCurrentProfile();
+//        nextActivity(profile);
     }
     private void signIn() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
@@ -183,10 +247,18 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
             String token = account.getIdToken();
+            profilePicURL = account.getPhotoUrl();
+            name = account.getDisplayName();
+            googleemail = account.getEmail();
             String serverAuth = account.getServerAuthCode();
 
-            System.out.println("Token : " + token);
-            System.out.println("ServerAuthToken : " + serverAuth);
+            System.out.println("Token is  : " + token);
+            Log.d("Token is", token);
+            System.out.println("ServerAuthToken == : " + serverAuth);
+
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putString("loginSatus", "true");
+            editor.apply();
 
             navigateToHome();
         } catch (ApiException e) {
@@ -198,7 +270,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private void navigateToHome() {
         Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("profileImage",profilePicURL.toString());
+        intent.putExtra("profileName",name.toString());
+        intent.putExtra("profileEmail",googleemail.toString());
+
         startActivity(intent);
 
     }
@@ -222,5 +297,61 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     public void onDestroy() {
         super.onDestroy();
         accessTokenTracker.stopTracking();
+    }
+
+    private void nextActivity(Profile profile){
+        if(profile != null){
+            Intent main = new Intent(SignInActivity.this, HomeActivity.class);
+            main.putExtra("name", profile.getFirstName());
+            main.putExtra("surname", profile.getLastName());
+            main.putExtra("email",email);
+            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+            startActivity(main);
+
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putBoolean("fbloginAcconutStatus", true);
+            editor.apply();
+        }
+    }
+    private void loadUserProfile(AccessToken newAccessToken)
+    {
+        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response)
+            {
+                try {
+                    String first_name = object.getString("first_name");
+                    String last_name = object.getString("last_name");
+                     email = object.getString("email");
+                    String id = object.getString("id");
+                    String image_url = "https://graph.facebook.com/"+id+ "/picture?type=normal";
+
+                    Intent main = new Intent(SignInActivity.this, HomeActivity.class);
+                    main.putExtra("name", first_name);
+                    main.putExtra("surname", last_name);
+                    main.putExtra("email",email);
+                    main.putExtra("imageUrl", image_url);
+                    startActivity(main);
+
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putBoolean("fbloginAcconutStatus", true);
+                    editor.putString("fbname", first_name);
+                    editor.putString("fnsurname", last_name);
+                    editor.putString("fbimageUrl", image_url);
+                    editor.putString("fbemail", email);
+
+                    editor.apply();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields","first_name,last_name,email,id");
+        request.setParameters(parameters);
+        request.executeAsync();
+
     }
 }

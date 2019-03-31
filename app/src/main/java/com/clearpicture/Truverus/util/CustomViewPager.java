@@ -1,4 +1,4 @@
-package com.clearpicture.Truverus;
+package com.clearpicture.Truverus.util;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

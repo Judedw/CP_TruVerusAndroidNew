@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 
 }

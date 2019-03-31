@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/email"
             android:title="HOME" />
 
         <item
@@ -19,7 +19,7 @@
             android:title="NFC SCAN" />
         <item
             android:id="@+id/nav_inbox"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/email"
             android:title="INBOX" />
         <item
             android:id="@+id/nav_community"
