@@ -78,13 +78,9 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
         }
 
         layoutManager = new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
-
         recycler_collection.setLayoutManager(layoutManager);
-
         mAdapter = new CollectionAdapter(getActivity(), collectionList);
-
         recycler_collection.setAdapter(mAdapter);
-
         mAdapter.notifyDataSetChanged();
 
         return  view;

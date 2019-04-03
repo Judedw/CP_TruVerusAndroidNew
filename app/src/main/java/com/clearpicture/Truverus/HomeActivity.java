@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.clearpicture.Truverus.Adapter.TabAdapter;
+import com.clearpicture.Truverus.Fragment.InboxFragment;
 import com.clearpicture.Truverus.Fragment.MyAccountFragment;
 import com.clearpicture.Truverus.Fragment.MyCollectionFragment;
 import com.clearpicture.Truverus.Fragment.NFCFragment;
@@ -217,6 +218,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.rlMailContainer, new NFCFragment().newInstance());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        } else if (id == R.id.nav_inbox) {
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.rlMailContainer, new InboxFragment().newInstance());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 

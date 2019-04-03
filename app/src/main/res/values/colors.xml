@@ -11,5 +11,8 @@
     <color name="watchvedio">#1b75ab</color>
     <color name="tabNotSelected">#bdbdbd</color>
     <color name="personalDetailsTextColor">#58595b</color>
+    <color name="inboxTitle">#4d4d4d</color>
+
+
 
 </resources>
