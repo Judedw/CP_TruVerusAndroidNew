@@ -1,12 +1,17 @@
 package com.clearpicture.Truverus.Fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +23,7 @@ import com.clearpicture.Truverus.HomeActivity;
 import com.clearpicture.Truverus.MainActivity;
 import com.clearpicture.Truverus.R;
 import com.clearpicture.Truverus.SignInActivity;
+import com.clearpicture.Truverus.listeners.GridItemClickListener;
 import com.clearpicture.Truverus.models.CollectionListModel;
 
 import java.util.ArrayList;
@@ -29,7 +35,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CollectionFragment extends Fragment implements View.OnClickListener {
+public class CollectionFragment extends Fragment implements View.OnClickListener, GridItemClickListener {
 
     private CollectionAdapter mAdapter;
     private RecyclerView recycler_collection;
@@ -38,15 +44,18 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
     private LinearLayout noCollectionContainer;
     private Button signinBtn;
     String signInStatus = "";
-    public CollectionFragment( ) {
+
+    public CollectionFragment() {
         // Required empty public constructor
     }
+
     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
     public CollectionFragment newInstance() {
         CollectionFragment fragment = new CollectionFragment();
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +64,7 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
         initializeList();
         recycler_collection = (RecyclerView) view.findViewById(R.id.recycler_collection);
         noCollectionContainer = (LinearLayout) view.findViewById(R.id.noCollectionContainer);
-        signinBtn = (Button)view.findViewById(R.id.signinBtn);
+        signinBtn = (Button) view.findViewById(R.id.signinBtn);
 
         signinBtn.setOnClickListener(this);
 
@@ -63,32 +72,44 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
         String restoredText = prefs.getString("loginSatus", "false");
         if (restoredText != null) {
             signInStatus = prefs.getString("loginSatus", "false");//"No name defined" is the default value.
-            System.out.print("the status is == "+signInStatus);
+            System.out.print("the status is == " + signInStatus);
 
         }
 
 
-        if (signInStatus .equals("false")){
+        if (signInStatus.equals("false")) {
             noCollectionContainer.setVisibility(View.VISIBLE);
             recycler_collection.setVisibility(View.INVISIBLE);
         }
-        if (signInStatus .equals("true")){
+        if (signInStatus.equals("true")) {
             noCollectionContainer.setVisibility(View.INVISIBLE);
             recycler_collection.setVisibility(View.VISIBLE);
         }
 
-        layoutManager = new GridLayoutManager(getActivity(),2,GridLayoutManager.VERTICAL,false);
+        layoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recycler_collection.setLayoutManager(layoutManager);
-        mAdapter = new CollectionAdapter(getActivity(), collectionList);
+        mAdapter = new CollectionAdapter(getActivity(), collectionList, CollectionFragment.this);
         recycler_collection.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
-        return  view;
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i("message", "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    Log.i("message", "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
+        return view;
     }
 
-
-
-    public void initializeList(){
+    public void initializeList() {
 
         collectionList = new ArrayList<>();
 
@@ -119,8 +140,6 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
         collectionListModel6.setImage("https://images.finishline.com/is/image/FinishLine/CE2392_BLK?$Grid_rwd_onModel$");
 
 
-
-
         collectionList.add(collectionListModel1);
         collectionList.add(collectionListModel2);
         collectionList.add(collectionListModel3);
@@ -131,11 +150,31 @@ public class CollectionFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-switch (v.getId()){
-    case R.id.signinBtn:
-        Intent i = new Intent(getActivity(), SignInActivity.class);
-        startActivity(i);
-        break;
-}
+        switch (v.getId()) {
+            case R.id.signinBtn:
+                Intent i = new Intent(getActivity(), SignInActivity.class);
+                startActivity(i);
+                break;
+        }
     }
+
+    @Override
+    public void onItemClick(Object object) {
+        ProductDetailsFragment newFragment = ProductDetailsFragment.newInstance();
+        newFragment.isCommingFromColletionUi = true;
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.addToBackStack(ProductDetailsFragment.TAG);
+        ft.replace(R.id.collectionContainer, newFragment, ViewEventsFragment.TAG).commit();
+    }
+
+    @Override
+    public void onItemClick(String id) {
+
+    }
+
+    @Override
+    public void onItemClick(String id, String msgId) {
+
+    }
+
 }

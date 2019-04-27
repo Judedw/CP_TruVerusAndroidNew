@@ -10,11 +10,24 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">651119158658237</string>
     <string name="fb_login_protocol_scheme">fb651119158658237</string>
-    <string name="description">When you think Nike, your mind can take you in so many different directions, but it all comes back to the swoosh logo. Nike is the creator of some the world\'s most influential shoe lines: Air Max, Air Force, and Air Huarache just to name a few. Nike evolves as styles shift, but their mission remains the same world.</string>
+    <string name="textData">fb651119158658237</string>
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu arcu in ligula ultrices placerat. Sed blandit diam vitae pretium vulputate. Nulla vel dignissim velit. Mauris quis arcu rutrum, bibendum ante eget, vehicula ante. Vivamus erat sapien.</string>
+    <string name="no_interent_connection">Can\'t connect to internet</string>
+    <string name="map_key">AIzaSyBXPG4TQNwd4qbAcH9H31GwsWjyHdaKDBs</string>
+    <string name="password_reset_text">Enter your email address and we will send a code to reset your password to the address we have for your account</string>
+    <string name="product_details">Enter your email address and we will send a code to reset your password to the address we have for your accountWhen you think Nike, your mind can take you in so many different directions, but it all comes back to the swoosh logo. Nike is the creator of some the worlds most influential shoe lines: Air Max, Air Force, and Air Huarache just to name a few. Nike evolves as styles shift, but their mission
+
+</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--231942660556-rsvipam2vuc8teqep5gqr8vlb0krfps6.apps.googleusercontent.com-->
+
+    <string-array name="names">
+        <item>Female</item>
+        <item>Male</item>
+
+    </string-array>
 
 </resources>

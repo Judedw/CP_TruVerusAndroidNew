@@ -6,40 +6,54 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/email"
+            android:icon="@drawable/home"
             android:title="HOME" />
 
         <item
             android:id="@+id/nav_my_account"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/myaccount"
             android:title="MY ACCOUNT" />
         <item
             android:id="@+id/nav_nfc_scan"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/nfcscan"
             android:title="NFC SCAN" />
         <item
             android:id="@+id/nav_inbox"
-            android:icon="@drawable/email"
+            android:icon="@drawable/inbox"
             android:title="INBOX" />
         <item
             android:id="@+id/nav_community"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/community"
             android:title="COMMUNITY" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/settings"
             android:title="SETTINGS" />
+
+    </group>
+
+    <group android:id="@+id/group1">
         <item
             android:id="@+id/nav_help"
-            android:icon="@drawable/ic_email_black"
-            android:title="SETTINGS" />
+            android:icon="@drawable/questionmark"
+            android:title="HELP" />
         <item
             android:id="@+id/nav_privacy"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/privacy"
             android:title="PRIVACY AND TERMS" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_email_black"
+            android:icon="@drawable/logout"
             android:title="LOGOUT" />
+
+    </group>
+
+    <group android:id="@+id/group2">
+        <item
+            android:title="Share this app" />
+        <item
+
+            android:title="Help Improve the App (Rate Us)" />
+
     </group>
 </menu>

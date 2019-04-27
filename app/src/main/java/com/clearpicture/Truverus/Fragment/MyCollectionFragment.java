@@ -1,6 +1,11 @@
 package com.clearpicture.Truverus.Fragment;
 
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +25,6 @@ import com.clearpicture.Truverus.R;
 public class MyCollectionFragment extends Fragment {
 
     private TabAdapter tabAdapter;
-
     private TabLayout tbTabs;
     private ViewPager vpFrags;
 
@@ -28,6 +32,7 @@ public class MyCollectionFragment extends Fragment {
         MyCollectionFragment fragment = new MyCollectionFragment();
         return fragment;
     }
+
 
     @Nullable
     @Override
@@ -42,6 +47,7 @@ public class MyCollectionFragment extends Fragment {
         setUpFragments();
 
         return view;
+
     }
     public void setUpFragments() {
         tabAdapter.addFragment(new CollectionFragment().newInstance(), "Collection");
@@ -51,4 +57,8 @@ public class MyCollectionFragment extends Fragment {
         vpFrags.setAdapter(tabAdapter);
         tbTabs.setupWithViewPager(vpFrags);
     }
+
+
+
+
 }

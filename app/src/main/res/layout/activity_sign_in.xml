@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".SignInActivity">
 
+    <RelativeLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SignInActivity">
 
 
         <RelativeLayout
@@ -19,8 +24,8 @@
 
             <Button
                 android:id="@+id/btnBack"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="23dp"
+                android:layout_height="15dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
@@ -33,9 +38,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="20dp"
-                android:text="Log In"
+                android:text="LOGIN"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -47,9 +52,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="24dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="0dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -57,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="If you already have an account with us, please login here."
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/txtEmail"
@@ -66,13 +73,15 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/white_input"
                     android:drawableStart="@drawable/ic_email_black"
+                    android:drawableLeft="@drawable/ic_email_black"
                     android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorGray"
+                    android:fontFamily="@font/tradegothiclt"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="14sp"
-                    android:drawableLeft="@drawable/ic_email_black" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/txtPassword"
@@ -81,42 +90,58 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/white_input"
                     android:drawableStart="@drawable/ic_key_black"
+                    android:drawableLeft="@drawable/ic_key_black"
                     android:drawablePadding="10dp"
-                    android:inputType="textPassword"
+                    android:drawableTint="@color/colorGray"
+                    android:fontFamily="@font/tradegothiclt"
                     android:hint="Password"
+                    android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="14sp"
-                    android:drawableLeft="@drawable/ic_key_black" />
+                    android:textSize="14sp" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="2"
                     android:orientation="horizontal">
 
                     <CheckBox
                         android:id="@+id/cbRemember"
-                        android:layout_width="wrap_content"
+                        android:layout_width="127dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/tradegothiclt"
                         android:text="Remember me"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="10sp" />
+                        android:textColor="@color/personalDetailsTextColor"
+                        android:textSize="12sp" />
 
                     <ImageView
+                        android:id="@+id/rememberPassword"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="7dp"
+                        android:layout_marginRight="7dp"
                         android:background="@drawable/question_mark" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/newUserlbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
+                    android:fontFamily="@font/tradegothiclt"
                     android:text="New to Truverus?"
                     android:textColor="@color/colorGray"
                     android:textSize="14sp" />
@@ -127,11 +152,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/white_input"
-                    android:text="Create Account"
                     android:padding="5dp"
+                    android:text="Create Account"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="13sp" />
+                    android:textSize="18sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -154,6 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:fontFamily="@font/tradegothiclt"
                         android:text="or login with"
                         android:textAlignment="center"
                         android:textColor="@color/colorGray"
@@ -173,27 +199,35 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.google.android.gms.common.SignInButton
-                    android:id="@+id/sign_in_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/google" />
 
                     <com.facebook.login.widget.LoginButton
-                    android:id="@+id/btnFacebookSignIn"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/facebook"
-                    android:text=""
-                    android:visibility="visible"
-                    facebook:com_facebook_login_text=""
-                    facebook:com_facebook_logout_text="" />
+                        android:id="@+id/btnFacebookSignIn"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/facebook"
+                        android:text=""
+                        android:visibility="visible"
+                        facebook:com_facebook_login_text=""
+                        facebook:com_facebook_logout_text="" />
+
                 </LinearLayout>
+
             </LinearLayout>
         </RelativeLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

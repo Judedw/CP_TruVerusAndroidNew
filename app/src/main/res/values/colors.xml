@@ -2,17 +2,19 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#000000</color>
 
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorGray">#97999c</color>
+    <color name="colorGray">#97999C</color>
     <color name="colodarkrGray">#838588</color>
     <color name="watchvedio">#1b75ab</color>
     <color name="tabNotSelected">#bdbdbd</color>
     <color name="personalDetailsTextColor">#58595b</color>
     <color name="inboxTitle">#4d4d4d</color>
-
+    <color name="account_text_color">#a0a2a5</color>
+    <color name="searchview_outline_color">#ebe8f6</color>
+    <color name="tag_container_border_color">#97b0ff</color>
 
 
 </resources>

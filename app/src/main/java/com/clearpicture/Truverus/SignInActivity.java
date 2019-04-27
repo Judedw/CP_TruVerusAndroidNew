@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.clearpicture.Truverus.Fragment.CollectionFragment;
@@ -43,9 +44,10 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
-    private SignInButton btnGoogleSignIn;
+    private Button btnGoogleSignIn;
     private Button btnCreateAcc;
     private LoginButton btnFacebookSignIn;
+    private ImageView rememberPassword;
 
     private CallbackManager callbackManager;
     private static final String EMAIL = "email";
@@ -72,9 +74,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_in);
 
         callbackManager = CallbackManager.Factory.create();
-
-
-        btnFacebookSignIn = (LoginButton) findViewById(R.id.btnFacebookSignIn);
+        btnFacebookSignIn = findViewById(R.id.btnFacebookSignIn);
+        rememberPassword = findViewById(R.id.rememberPassword);
         btnGoogleSignIn = findViewById(R.id.sign_in_button);
         btnCreateAcc = findViewById(R.id.btnCreateAcc);
         btnFacebookSignIn.setReadPermissions(Arrays.asList( EMAIL));
@@ -83,12 +84,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnFacebookSignIn.setCompoundDrawablePadding(5);
         btnFacebookSignIn.setText("");
 
-
-
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(AppControl.clientID).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         btnCreateAcc.setOnClickListener(this) ;
+        rememberPassword.setOnClickListener(this);
+
         btnGoogleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +110,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         };
+
         System.out.print(accessTokenTracker);
         // If the access token is available already assign it.
          accessToken = AccessToken.getCurrentAccessToken();
@@ -120,7 +122,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
-
 
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -138,8 +139,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
             }
 
-
-
             @Override
             public void onCancel() {
                 // App code
@@ -153,16 +152,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-
-
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-
-
                         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -186,9 +181,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.print("ljkghgcf"+loginResult.getAccessToken().getUserId());
                         System.out.print(loginResult.getAccessToken().getToken());
                         Profile profile = Profile.getCurrentProfile();
-
-//                        nextActivity(profile);
-
                     }
 
                     @Override
@@ -203,8 +195,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 });
 
     }
-
-
 
     @Override
     protected void onStart() {
@@ -238,8 +228,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             handleSignInResult(task);
         }
     }
-
-
 
     private void handleSignInResult(Task<GoogleSignInAccount> task) {
         try {
@@ -286,8 +274,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             }
             case R.id.btnCreateAcc: {
-               Intent i = new Intent(SignInActivity.this,SignUpActivity.class);
-               startActivity(i);
+                Intent i = new Intent(SignInActivity.this,SignUpActivity.class);
+                startActivity(i);
+                break;
+            }
+            case R.id.rememberPassword :{
+                Intent i = new Intent(SignInActivity.this,PassWordResetActivity.class);
+                startActivity(i);
                 break;
             }
 

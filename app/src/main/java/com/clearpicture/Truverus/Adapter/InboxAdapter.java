@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.clearpicture.Truverus.R;
+import com.clearpicture.Truverus.listeners.GridItemClickListener;
 import com.clearpicture.Truverus.models.CollectionListModel;
+import com.clearpicture.Truverus.models.FeedBackModel;
 import com.clearpicture.Truverus.models.InboxModel;
 
 import java.util.ArrayList;
@@ -20,10 +22,10 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.ViewHolder> 
     private LayoutInflater inflater;
     private ArrayList<InboxModel> messageList;
     private Context context;
+    private GridItemClickListener gridItemClickListener;
 
-
-    public InboxAdapter(Context context, ArrayList<InboxModel> messageList){
-
+    public InboxAdapter(Context context, ArrayList<InboxModel> messageList,GridItemClickListener gridItemClickListener){
+        this.gridItemClickListener = gridItemClickListener;
         this.messageList = messageList;
         this.context = context;
     }
@@ -55,7 +57,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.ViewHolder> 
         return messageList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView titleTxt;
         public TextView bodyTxt;
         public TextView dateTxt;
@@ -65,12 +67,25 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            titleTxt = (TextView) itemView.findViewById(R.id.titleTxt);
-            bodyTxt = (TextView) itemView.findViewById(R.id.bodyTxt);
-            dateTxt = (TextView) itemView.findViewById(R.id.dateTxt);
-            timeTxt = (TextView) itemView.findViewById(R.id.timeTxt);
+            titleTxt = itemView.findViewById(R.id.titleTxt);
+            bodyTxt = itemView.findViewById(R.id.bodyTxt);
+            dateTxt = itemView.findViewById(R.id.dateTxt);
+            timeTxt = itemView.findViewById(R.id.timeTxt);
             notificationIcon = itemView.findViewById(R.id.notificationIcon);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+
+            InboxModel inboxModel = messageList.get(position);
+
+            if (inboxModel != null) {
+
+                gridItemClickListener.onItemClick(inboxModel);
+
+            }
         }
     }
 }

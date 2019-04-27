@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+    android:gravity="center"
+              android:orientation="vertical"
+              android:padding="15dp">
+<ImageView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/new_promo"/>
+    <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="NEW PROMOTIONS"
+        android:textColor="@color/com_facebook_blue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/tradegothiclt"
+            android:text="Nike Air Max 270 (25% Off)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+    <EditText
+        android:id="@+id/txtremoveNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="10dp"
+        android:text="4940  St Jean Baptiste St, Quebec"
+        android:inputType="text"
+        android:focusable="false"
+        android:fontFamily="@font/tradegothiclt"
+        android:drawableLeft="@drawable/cross_square_button"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:background="@android:color/transparent"
+        android:paddingLeft="10dp"
+        android:textColor="@color/personalDetailsTextColor"
+        android:textSize="14sp" />
+</LinearLayout>

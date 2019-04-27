@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite"
-    tools:context=".Fragment.MyAccountFragment">
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".Fragment.MyAccountFragment">
 
     <View
         android:id="@+id/view"
@@ -43,12 +41,13 @@
     <ImageView
         android:id="@+id/editProfilwImg"
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/question_mark"
+        android:background="@drawable/edit_profile"
         android:gravity="end"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -56,14 +55,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePicImg"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/addidas_red"
+        android:src="@drawable/profilepic"
         app:civ_border_color="@color/colorGray"
         app:civ_border_width="3dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,352 +70,373 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:id="@+id/detailsContainer"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicImg"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/detailsContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="John Doe"
-            android:textColor="@color/colorBlack"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Johndoe88@gmail.com"
-            android:textColor="@color/colorGray"
-            android:textSize="14sp" />
-    </LinearLayout>
-<LinearLayout
-    android:id="@+id/personalDetailsMainView"
-    android:layout_marginRight="30dp"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/detailsContainer"
-    tools:ignore="MissingConstraints">
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePicImg"
+            tools:ignore="MissingConstraints">
 
-    <LinearLayout
-        android:id="@+id/genderDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/genderTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/textGender"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Gender"
-                android:text="Female"
-                android:textStyle="bold"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:inputType="text"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bdayDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="24dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/bdattextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/txtbday"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Birthday"
-                android:text="10-09-1992 (26 years)"
-                android:inputType="text"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/adressDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/addrestextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/txtaddress"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Address"
-                android:textStyle="bold"
-                android:text="4940  St Jean Baptiste St, Quebec"
-                android:inputType="text"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/contactDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/contacttextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/txtcontact"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Contact Number"
-                android:textStyle="bold"
-                android:text="418-249-9852"
-                android:inputType="text"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/eStatusDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/eStatustextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/txtStatus"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Employment Status"
-                android:textStyle="bold"
-                android:text="Engineer"
-                android:inputType="text"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/interestDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/interesttextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/txtInterest"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawablePadding="5dp"
-                android:hint="Fashion Interest"
-                android:inputType="textMultiLine"
-                android:singleLine="false"
-                android:paddingLeft="10dp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:text="New Trendes, Gucci, Armani, Nike,Jeans, Latest Trends, Vintage"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp"
+                android:text="John Doe"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-        </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Johndoe88@gmail.com"
+                android:textColor="@color/colorGray"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/sportDetailsContainer"
+        android:id="@+id/personalDetailsMainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="24dp"
-        tools:ignore="MissingConstraints">
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_email_black"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/sportTextView"
+        <LinearLayout
+            android:id="@+id/genderDetailsContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/gender" />
 
-            <EditText
-                android:id="@+id/txtSport"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/genderTextView"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:drawablePadding="5dp"
-                android:hint="Favorite Sports"
-                android:textStyle="bold"
-                android:text="Soccer, Hockey, Basketball"
-                android:inputType="text"
-                android:background="@android:color/transparent"
-                android:paddingLeft="10dp"
-                android:state_pressed="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:clickable="false"
-                android:textColor="@color/personalDetailsTextColor"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
 
-        </android.support.design.widget.TextInputLayout>
+
+                <EditText
+                    android:id="@+id/textGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Gender"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:text="Female"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bdayDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/birthday" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/bdattextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtbday"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Birthday"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:text="10-09-1992 (26 years)"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/adressDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/address" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/addrestextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Address"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:text="4940  St Jean Baptiste St, Quebec"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contactDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/contact_no" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/contacttextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtcontact"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Contact Number"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:text="418-249-9852"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/eStatusDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/employment_status" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/eStatustextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Employment Status"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:text="Engineer"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/tradegothiclt"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/interestDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/fashion_interest" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/interesttextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtInterest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Fashion Interest"
+                    android:inputType="textMultiLine"
+                    android:paddingLeft="10dp"
+                    android:singleLine="false"
+                    android:text="New Trendes, Gucci, Armani, Nike,Jeans, Latest Trends, Vintage"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sportDetailsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/favourite_sport" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/sportTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <EditText
+                    android:id="@+id/txtSport"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:drawablePadding="5dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Favorite Sports"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:state_pressed="false"
+                    android:text="Soccer, Hockey, Basketball"
+                    android:textColor="@color/personalDetailsTextColor"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
+</ScrollView>
+
+
 
 </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
-</ScrollView>
+
+
