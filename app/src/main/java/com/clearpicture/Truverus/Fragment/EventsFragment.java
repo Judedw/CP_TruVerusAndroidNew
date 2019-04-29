@@ -3,9 +3,12 @@ package com.clearpicture.Truverus.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,12 +43,26 @@ public class EventsFragment extends Fragment implements GridItemClickListener {
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_events, container, false);
         initializeList();
-        eventsrecyclerView = (RecyclerView) view.findViewById(R.id.eventsrecyclerView);
+        eventsrecyclerView = view.findViewById(R.id.eventsrecyclerView);
         layoutManager = new GridLayoutManager(getActivity(),1,GridLayoutManager.VERTICAL,false);
         eventsrecyclerView.setLayoutManager(layoutManager);
         mAdapter = new EventAdapter(getActivity(), eventsModelArrayList,EventsFragment.this);
         eventsrecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i("message", "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    Log.i("message", "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
 

@@ -3,9 +3,12 @@ package com.clearpicture.Truverus.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +46,27 @@ public class FeedBackFragment extends Fragment implements GridItemClickListener 
         View view = inflater.inflate(R.layout.fragment_feed_back, container, false);
         initializeList();
 
-        feedBackrecyclerView = (RecyclerView) view.findViewById(R.id.feedBackrecyclerView);
+        feedBackrecyclerView = view.findViewById(R.id.feedBackrecyclerView);
         layoutManager = new GridLayoutManager(getActivity(),1,GridLayoutManager.VERTICAL,false);
         feedBackrecyclerView.setLayoutManager(layoutManager);
         mAdapter = new FeedBackAdapter(getActivity(), feedbackList,FeedBackFragment.this);
         feedBackrecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i("message", "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    Log.i("message", "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -70,10 +88,10 @@ public class FeedBackFragment extends Fragment implements GridItemClickListener 
 
     @Override
     public void onItemClick(Object object) {
-        ViewPromotionsFragment newFragment = ViewPromotionsFragment.newInstance();
+        FeedBackFormFragment newFragment = FeedBackFormFragment.newInstance();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.addToBackStack(ViewPromotionsFragment.TAG);
-        ft.replace(R.id.feedBackContainer, newFragment, ViewPromotionsFragment.TAG).commit();
+        ft.replace(R.id.feedBackContainer, newFragment, FeedBackFormFragment.TAG).commit();
     }
 
     @Override

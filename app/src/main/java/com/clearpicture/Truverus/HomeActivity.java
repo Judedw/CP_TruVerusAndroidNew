@@ -39,8 +39,10 @@ import com.clearpicture.Truverus.Fragment.NFCFragment;
 import com.clearpicture.Truverus.Fragment.ProductDetailsFragment;
 import com.clearpicture.Truverus.Fragment.SettingsFragment;
 import com.clearpicture.Truverus.Fragment.TransferOwnershipFragment;
+import com.clearpicture.Truverus.main.AppControl;
 import com.facebook.FacebookSdk;
 import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -58,7 +60,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tbTabs;
     private ViewPager vpFrags;
     private RelativeLayout rlMailContainer;
-
 
     private String userID;
     private String userName;
@@ -83,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean status;
     private boolean restoredText;
     private String fbEmailAdd;
-    private boolean loginStatus = false;
+    private boolean loginStatus;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -94,22 +95,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FacebookSdk.sdkInitialize(this);
         Intent intent = getIntent();
 
-        navigationView =  findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
-        imgProPic =  header.findViewById(R.id.imgProPic);
+        imgProPic = header.findViewById(R.id.imgProPic);
         nameLbl = header.findViewById(R.id.nameLbl);
         emailLbl = header.findViewById(R.id.emailLbl);
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestServerAuthCode(AppControl.clientID).requestIdToken(AppControl.clientID).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         restoredText = prefs.getBoolean("fbloginAcconutStatus", false);
         if (restoredText == true) {
             status = prefs.getBoolean("fbloginAcconutStatus", true);
-            loginStatus = prefs.getBoolean("loginStatus",false);//"No name defined" is the default value.
         }
-
-        if (loginStatus == true){
-            hideItem();
+        if (loginStatus == false) {
+            System.out.print("log out user");
         }
         googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (googleSignInAccount != null) {
@@ -122,7 +124,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             System.out.println("Auth Token : " + serverAuthCode);
             System.out.println("User Token : " + userToken);
-
+            ShowAllItems();
+        } else {
+            hideItem();
         }
 
         tabAdapter = new TabAdapter(getSupportFragmentManager());
@@ -180,9 +184,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             emailLbl.setText(fbEmailAdd);
             System.out.print(fbimageUrl);
 
+        } else {
+            System.out.print("log out user");
 
-        }else{
-            hideItem();
         }
     }
 
@@ -193,7 +197,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         vpFrags.setAdapter(tabAdapter);
         tbTabs.setupWithViewPager(vpFrags);
     }
-
 
 
     @Override
@@ -233,14 +236,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        }else if (id == R.id.nav_community) {
+        } else if (id == R.id.nav_community) {
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.rlMailContainer, new CommunityFragment().newInstance());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-        }else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_settings) {
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.rlMailContainer, new SettingsFragment().newInstance());
@@ -255,8 +258,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout) {
-            Intent i = new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(i);
+            logOut();
+
+            LoginManager.getInstance().logOut();
+            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putBoolean("fbloginAcconutStatus", false);
+            editor.apply();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -264,15 +271,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void signOut() {
+    private void logOut() {
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                navigateToLogIn();
+                // LOGIN STATUS == FALSE
+                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                editor.putString("loginSatus", "false");
+
+                // REFRESH ACTIVITY
+                editor.apply();
+                finish();
+                startActivity(getIntent());
+
+//                // CALL NFC SCREEN
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.rlMailContainer, new NFCFragment().newInstance());
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
             }
         });
     }
-
 
     private void navigateToLogIn() {
         Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
@@ -284,6 +303,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
         startActivity(intent);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -293,10 +313,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void hideItem()
-    {
+    private void hideItem() {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
-        nav_Menu.findItem(R.id.nav_settings).setVisible(false);
+        nav_Menu.findItem(R.id.nav_inbox).setVisible(false);
+        nav_Menu.findItem(R.id.nav_community).setVisible(false);
+        nav_Menu.findItem(R.id.nav_my_account).setVisible(false);
+        nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+
+    }
+
+    private void ShowAllItems() {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.nav_inbox).setVisible(true);
+        nav_Menu.findItem(R.id.nav_community).setVisible(true);
+        nav_Menu.findItem(R.id.nav_my_account).setVisible(true);
+        nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

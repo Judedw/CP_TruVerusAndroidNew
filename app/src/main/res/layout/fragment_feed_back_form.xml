@@ -84,7 +84,7 @@
             android:clickable="false"
             android:drawablePadding="5dp"
             android:focusable="true"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:paddingLeft="10dp"
             android:textColor="@color/personalDetailsTextColor"
             android:textSize="14sp"/>

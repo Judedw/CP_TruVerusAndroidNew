@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -390,7 +391,13 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
         }
     };
-
+    public static Bitmap loadBitmapFromView(View v) {
+        Bitmap b = Bitmap.createBitmap( v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.layout(0, 0, v.getWidth(), v.getHeight());
+        v.draw(c);
+        return b;
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
@@ -400,14 +407,13 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 if (resultCode == RESULT_OK) {
 
                     Uri imageUri = imageReturnedIntent.getData();
-                    String selectedImagePath = getPath(imageUri);
-                    File f = new File(selectedImagePath);
-                    Bitmap bmp = Compressor.getDefault(getActivity()).compressToBitmap(f);
-                    Drawable drawable = new BitmapDrawable(this.getResources(), bmp);
+                    profilePicImg.setImageURI(imageUri);
 
-//                    imgvPhoto.setImageBitmap(bmp);
-                    profilePicImg.setImageDrawable(drawable);
-//                    profilePicImg.setImageBitmap(bmp);
+//                    String selectedImagePath = getPath(imageUri);
+//                    File f = new File(selectedImagePath);
+//                    final Bitmap bmp = Compressor.getDefault(getActivity()).compressToBitmap(f);
+
+//                            profilePicImg.setImageBitmap(bmp);
 
                 }
                 break;

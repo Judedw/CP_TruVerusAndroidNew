@@ -346,5 +346,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         request.setParameters(parameters);
         request.executeAsync();
 
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean("fbloginAcconutStatus", true);
+
+        editor.apply();
     }
 }

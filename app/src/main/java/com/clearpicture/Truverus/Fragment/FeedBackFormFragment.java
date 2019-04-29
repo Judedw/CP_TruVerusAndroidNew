@@ -19,11 +19,9 @@ import com.clearpicture.Truverus.R;
  * A simple {@link Fragment} subclass.
  */
 public class FeedBackFormFragment extends Fragment {
-
-
     private RatingBar ratingbar;
-
-    public FeedBackFormFragment newInstance() {
+    public static final String TAG = FeedBackFormFragment.class.getSimpleName();
+    public static FeedBackFormFragment newInstance() {
         FeedBackFormFragment fragment = new FeedBackFormFragment();
         return fragment;
     }

@@ -11,63 +11,92 @@
 <ImageView
     android:id="@+id/itemImage"
     android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:src="@drawable/nike"/>
+    android:layout_height="80dp"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginLeft="15dp"
+        android:id="@+id/promodetailsContainer"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_toStartOf="@+id/discountLabel"
+        android:layout_toLeftOf="@+id/discountLabel"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/promoItemNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NIKE AIR MAX 270"/>
+            android:text="NIKE AIR MAX 270" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/media_play_symbol"/>
+                android:src="@drawable/media_play_symbol" />
+
             <TextView
-                android:text=" 02-Feb-2019"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text=" 02-Feb-2019" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
+                android:layout_width="15dp"
                 android:layout_height="20dp"
-                android:src="@drawable/square_hape_shadow"/>
+                android:src="@drawable/square_hape_shadow" />
+
             <TextView
-                android:text=" 18-Feb-2019"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text=" 18-Feb-2019" />
 
         </LinearLayout>
 
 
     </LinearLayout>
 
+
     <TextView
+        android:id="@+id/discountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:gravity="center_vertical"
         android:text="25%"
-        android:layout_marginLeft="15dp"
-        android:textStyle="bold"
+        android:textAlignment="center"
         android:textColor="@color/colorBlack"
-        android:textSize="40dp"/>
+        android:textSize="40dp"
+        android:textStyle="bold" />
+</RelativeLayout>
+
+
+
+
 </LinearLayout>
